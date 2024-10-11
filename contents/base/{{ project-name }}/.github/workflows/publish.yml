@@ -1,0 +1,37 @@
+name: PyPI Publish
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, 'Bump up version from publish.yml to')"
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.11
+    strategy:
+      fail-fast: true
+
+    steps:
+      - name: Install python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+      - name: Install curl
+        run: |
+          apt-get update
+          apt-get install -y curl
+      - name: Install poetry
+        uses: snok/install-poetry@v1
+      - name: Checkout {{ project-name }}
+        uses: actions/checkout@v3
+        with:
+          path: './{{ project-name }}'
+      - name: Publish {{ project-name }}
+        uses: p6m-dev/template/.github/actions/publish_action@main
+        with:
+          publish_path: {{ project-name }}
+          ARTIFACTORY_USERNAME: {{ github-artifactory_username }}
+          ARTIFACTORY_IDENTITY_TOKEN: {{ github-artifactory_id_token }}

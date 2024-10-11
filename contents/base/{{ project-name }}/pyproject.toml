@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "{{ project-name }}"
+version = "0.1.0"
+description = "{{ project-title }}"
+
+authors = [
+    "{{ author_full }}",
+    "Archetect <archetect@github.io>",
+]
+
+readme = "README.md"
+packages = [
+    { include = "{{ project_name }}", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "3.11.*"
+
+metaflow = "^2.11.5"
+kubernetes = "^29.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.4"
+flake8 = "^6.1.0"
+
+[[tool.poetry.source]]
+name = "{{ org_name }}_{{ venture_name }}_pypi"
+url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-venture-name }}-pypi/simple"
+priority = "supplemental"
+
+[[tool.poetry.source]]
+name = "{{ org_name }}_{{ venture_name }}_pypi_push"
+url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-venture-name }}-pypi"
+priority = "supplemental"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.poetry.scripts]
+main = "{{ project_name }}.main:main"
+docker-build = "manage.docker:docker_build"
+docker-run = "manage.docker:docker_run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

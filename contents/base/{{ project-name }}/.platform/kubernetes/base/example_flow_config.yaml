@@ -1,0 +1,14 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformTask
+metadata:
+  name: {{ project-name }}-example-flow-config
+  namespace: metaflow
+spec:
+  metaflow:
+    enabled: true
+  resources:
+    s3bucket:
+      - name: metaflow
+        accesses: [all]
+#  secrets:
+#    - some-secret-name-in-aws

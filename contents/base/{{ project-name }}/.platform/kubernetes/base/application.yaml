@@ -1,0 +1,27 @@
+apiVersion: meta.p6m.dev/v1alpha1
+kind: PlatformApplication
+metadata:
+  name: {{ project-name }}
+  labels:
+    p6m.dev/app: {{ project-name }}
+spec:
+  deployment:
+    image: {{ project-name }}-server:latest
+    {% if "FastAPI" in transport -%}
+    ports:
+      - protocol: http
+        port: 8080
+    {% else -%}
+    ports:    
+      - protocol: http
+        port: 8080
+      - protocol: http
+        port: 8081
+    {% endif -%}
+    readinessProbe:
+      {% if "FastAPI" in transport -%}
+      port: 8080
+      {% else -%}
+      port: 8081
+      {% endif -%}
+      path: /health/readiness

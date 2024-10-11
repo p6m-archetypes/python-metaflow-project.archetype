@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ project-name }}-deploy-metaflows-job
+  namespace: metaflow
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+#    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: metaflow
+      containers:
+        - name: metaflow-create
+          image: {{ project-name }}-server:latest
+          command:
+            - "/bin/bash"
+            - "/app/create_workflows.sh"
+          env:
+            - name: METAFLOW_USER
+              value: "Metaflow_User"
+            - name: METAFLOW_ARGO_EVENTS_EVENT
+              value: "argo-events-webhookmetaflow-event"
+            - name: METAFLOW_ARGO_EVENTS_EVENT_BUS
+              value: "default"
+            - name: METAFLOW_ARGO_EVENTS_EVENT_SOURCE
+              value: "argo-events-webhook"
+#            - name: METAFLOW_ARGO_EVENTS_INTERNAL_WEBHOOK_URL
+#              value: "http://argo-events-webhook-eventsource-svc:12000/metaflow-event"
+            - name: METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT
+              value: "metaflow"
+            - name: METAFLOW_ARGO_EVENTS_WEBHOOK_URL
+              value: "http://argo-events-webhook-eventsource-svc:12000/metaflow-event"
+            - name: METAFLOW_DEFAULT_METADATA
+              value: "service"
+            - name: METAFLOW_KUBERNETES_NAMESPACE
+              value: "metaflow"
+            - name: METAFLOW_KUBERNETES_SERVICE_ACCOUNT
+              value: "metaflow"
+#            - name: METAFLOW_SERVICE_INTERNAL_URL
+#              value: "http://metaflow-metaflow-service.metaflow:8080"
+            - name: METAFLOW_SERVICE_URL
+              value: "http://metaflow-metaflow-service.metaflow:8080"
+            - name: USER
+              value : "{{ project-name }}"
+      restartPolicy: Never
+  backoffLimit: 2
