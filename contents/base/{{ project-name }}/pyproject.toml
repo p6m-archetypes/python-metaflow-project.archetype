@@ -24,13 +24,13 @@ pytest = "^7.4.4"
 flake8 = "^6.1.0"
 
 [[tool.poetry.source]]
-name = "{{ org_name }}_{{ venture_name }}_pypi"
-url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-venture-name }}-pypi/simple"
+name = "{{ org_name }}_{{ solution_name }}_pypi"
+url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-solution-name }}-pypi/simple"
 priority = "supplemental"
 
 [[tool.poetry.source]]
-name = "{{ org_name }}_{{ venture_name }}_pypi_push"
-url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-venture-name }}-pypi"
+name = "{{ org_name }}_{{ solution_name }}_pypi_push"
+url = "https://p6m-dev.jfrog.io/artifactory/api/pypi/{{ org-solution-name }}-pypi"
 priority = "supplemental"
 
 [tool.pytest.ini_options]
