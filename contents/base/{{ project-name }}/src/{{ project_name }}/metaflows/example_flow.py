@@ -18,7 +18,7 @@ class {{ ProjectName }}ExampleFlow(FlowSpec):
         print('End step')
 
     @kubernetes(service_account="{{ project-name }}-example-flow-config",
-                image='p6m-dev.jfrog.io/p6m-dev-docker/applications/{{ project-name }}-server:latest')
+                image='p6m.jfrog.io/p6m-dev-docker/applications/{{ project-name }}-server:latest')
     @step
     def process(self):
         print('Process step')
