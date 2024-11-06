@@ -25,8 +25,6 @@ spec:
               value: "default"
             - name: METAFLOW_ARGO_EVENTS_EVENT_SOURCE
               value: "argo-events-webhook"
-#            - name: METAFLOW_ARGO_EVENTS_INTERNAL_WEBHOOK_URL
-#              value: "http://argo-events-webhook-eventsource-svc:12000/metaflow-event"
             - name: METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT
               value: "metaflow"
             - name: METAFLOW_ARGO_EVENTS_WEBHOOK_URL
@@ -37,8 +35,6 @@ spec:
               value: "metaflow"
             - name: METAFLOW_KUBERNETES_SERVICE_ACCOUNT
               value: "metaflow"
-#            - name: METAFLOW_SERVICE_INTERNAL_URL
-#              value: "http://metaflow-metaflow-service.metaflow:8080"
             - name: METAFLOW_SERVICE_URL
               value: "http://metaflow-metaflow-service.metaflow:8080"
             - name: USER

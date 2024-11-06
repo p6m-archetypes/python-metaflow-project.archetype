@@ -6,6 +6,3 @@ resources:
   - application.yaml
   - example_flow_config.yaml
   - deploy_metaflows.yaml
-
-configurations:
-  - application_customizations.yaml
