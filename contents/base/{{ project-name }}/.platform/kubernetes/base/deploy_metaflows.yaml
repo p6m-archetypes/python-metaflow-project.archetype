@@ -9,9 +9,9 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: metaflow
+      serviceAccountName: {{ project-name }}
       containers:
-        - name: metaflow-create
+        - name: {{ project-name }}-create
           image: {{ project-name }}-server:latest
           command:
             - "/bin/bash"
@@ -26,7 +26,7 @@ spec:
             - name: METAFLOW_ARGO_EVENTS_EVENT_SOURCE
               value: "argo-events-webhook"
             - name: METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT
-              value: "metaflow"
+              value: "{{ project-name }}"
             - name: METAFLOW_ARGO_EVENTS_WEBHOOK_URL
               value: "http://argo-events-webhook-eventsource-svc:12000/metaflow-event"
             - name: METAFLOW_DEFAULT_METADATA
@@ -34,10 +34,12 @@ spec:
             - name: METAFLOW_KUBERNETES_NAMESPACE
               value: "metaflow"
             - name: METAFLOW_KUBERNETES_SERVICE_ACCOUNT
-              value: "metaflow"
+              value: "{{ project-name }}"
             - name: METAFLOW_SERVICE_URL
               value: "http://metaflow-metaflow-service.metaflow:8080"
             - name: USER
               value : "{{ project-name }}"
+            - name: METAFLOW_DATASTORE_SYSROOT_S3
+              value: "s3://metaflow-dev-us-east-2-{{ org-name }}-{{ solution_name }}"
       restartPolicy: Never
   backoffLimit: 2

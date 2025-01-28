@@ -17,8 +17,8 @@ class {{ ProjectName }}ExampleFlow(FlowSpec):
     def end(self):
         print('End step')
 
-    @kubernetes(service_account="{{ project-name }}-example-flow-config",
-                image='307946657178.dkr.ecr.us-east-2.amazonaws.com/{{ project-name }}-server:latest')
+    @kubernetes(service_account="{{ project-name }}",
+                image='{{ project-name }}-server:latest')
     @step
     def process(self):
         print('Process step')

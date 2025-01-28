@@ -33,11 +33,11 @@ ENV VIRTUAL_ENV=/app/.venv \
 #    METAFLOW_ARGO_EVENTS_EVENT_BUS="default" \
 #    METAFLOW_ARGO_EVENTS_EVENT_SOURCE="argo-events-webhook" \
 #    METAFLOW_ARGO_EVENTS_INTERNAL_WEBHOOK_URL="http://argo-events-webhook-eventsource-svc:12000/metaflow-event" \
-#    METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT="metaflow" \
+#    METAFLOW_ARGO_EVENTS_SERVICE_ACCOUNT="{{ project-name }}" \
 #    METAFLOW_ARGO_EVENTS_WEBHOOK_URL="http://localhost:12000/metaflow-event" \
 #    METAFLOW_DEFAULT_METADATA="service" \
 #    METAFLOW_KUBERNETES_NAMESPACE="metaflow" \
-#    METAFLOW_KUBERNETES_SERVICE_ACCOUNT="metaflow" \
+#    METAFLOW_KUBERNETES_SERVICE_ACCOUNT="{{ project-name }}" \
 #    METAFLOW_SERVICE_INTERNAL_URL="http://metaflow-metaflow-service.metaflow:8080" \
 #    METAFLOW_SERVICE_URL="http://localhost:8080"
 

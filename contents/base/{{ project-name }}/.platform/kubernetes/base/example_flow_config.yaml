@@ -1,7 +1,7 @@
 apiVersion: meta.p6m.dev/v1alpha1
 kind: PlatformTask
 metadata:
-  name: {{ project-name }}-example-flow-config
+  name: {{ project-name }}
   namespace: metaflow
 spec:
   metaflow:
