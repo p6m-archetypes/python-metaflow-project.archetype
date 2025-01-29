@@ -1,39 +1,16 @@
-# This workflow will checkout all necessary repos, install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-
 name: Python Tests
+
 on:
   workflow_dispatch:
   pull_request:
     branches: [ "main" ]
 
+permissions: write-all
+
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-    container:
-      image: nvidia/cuda:12.0.1-cudnn8-devel-ubuntu22.04
-    strategy:
-      fail-fast: true
-
-    steps:
-      - name: Install python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
-      - name: Install curl
-        run: |
-          apt-get update
-          apt-get install -y curl
-      - name: Install poetry
-        uses: snok/install-poetry@v1
-      - name: Checkout {{ project-name }}
-        uses: actions/checkout@v3
-        with:
-          path: './{{ project-name }}/'
-      - name: Test {{ project-name }}
-        uses: p6m-dev/template/.github/actions/test_action@main
-        with:
-          test_path: {{ project-name }}
-          ARTIFACTORY_USERNAME: {{ github-artifactory_username }}
-          ARTIFACTORY_IDENTITY_TOKEN: {{ github-artifactory_id_token }}
+  build_and_test:
+    name: Build & Test
+    uses: p6m-dev/github-actions/.github/workflows/test-python.yaml@main
+    secrets:
+      ARTIFACTORY_USERNAME: ${{'{'}}{ secrets.ARTIFACTORY_USERNAME }}
+      ARTIFACTORY_IDENTITY_TOKEN: ${{'{'}}{ secrets.ARTIFACTORY_IDENTITY_TOKEN }}

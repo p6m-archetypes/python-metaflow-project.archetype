@@ -1,5 +1,5 @@
 from unittest import TestCase
-import {{ project_name }}.{{ package_name }} as {{ package_name }}
+import {{ project_name }}.{{ package_name }}.{{ package_name }} as {{ package_name }}
 
 
 class Test(TestCase):
